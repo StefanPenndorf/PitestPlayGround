@@ -1,0 +1,37 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        //Needed only for SNAPSHOT versions
+        //maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    }
+    dependencies {
+        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.4.6'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'info.solidsoft.pitest' version '1.4.6'
+}
+
+group 'net.cyphoria.pitest'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
+}
+
+test {
+    useTestNG()
+}
+
+pitest {
+    testPlugin = 'testng'
+    pitestVersion = '1.5.1'
+    verbose = true
+}
